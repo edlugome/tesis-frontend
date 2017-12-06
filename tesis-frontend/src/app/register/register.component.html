@@ -1,0 +1,45 @@
+<hr>
+<div class="container-fluid">
+  <div>
+      <h3>Registro de estudiante</h3>
+  </div>
+  <hr>
+
+<form [formGroup]="formulario" (ngSubmit)="register(formulario.value)" >
+
+  <mat-form-field class="example-full-width">
+    <input matInput  placeholder="Nombre" autofocus formControlName="nombre" required> 
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Apellido" formControlName="apellido" required>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Cédula" formControlName="cedula"required  >
+  </mat-form-field>
+  
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Correo Electrónico" type="email" formControlName="email" required>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Contraseña" type="password" formControlName="password" required >
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Repite la contraseña" type="password" formControlName="confirmPassword" required>
+  </mat-form-field>
+
+  <div class="alert alert-danger" *ngIf="formulario.controls.confirmPassword.errors?.MatchPassword">Las contraseñas no coinciden</div>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Teléfono" type="number" formControlName="telefono" required>
+  </mat-form-field>
+  
+  <div>
+      <button mat-button color="primary" type="submit" [disabled]="!formulario.valid" >Registrarse</button>
+  </div>
+
+</form>
+</div>

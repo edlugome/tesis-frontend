@@ -1,0 +1,23 @@
+<mat-toolbar color="primary">
+  <nav>
+      <a class="linkA" routerLink="/studentdashboard">Sistema Tesis</a>
+  </nav>
+ </mat-toolbar>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav class="example-sidenav" mode="side" disableClose opened="true">
+      <div class="content">
+        <button mat-button color = "primary" class="sidebutton">Registrar Proyecto</button>
+        <button mat-button color = "primary" class="sidebutton">Ver Proyectos</button>
+        <button mat-button color = "primary" class="sidebutton" (click)="logout()">Salir</button>
+        <hr>
+      </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      
+    </mat-sidenav-content>
+
+   
+  
+</mat-sidenav-container>
+
+

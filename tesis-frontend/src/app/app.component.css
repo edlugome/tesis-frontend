@@ -1,0 +1,22 @@
+nav a {
+    padding: 5px 10px;
+    text-decoration: none;
+    background-color: #3f51b5;
+    border-radius: 4px;
+    color: rgb(255, 255, 255);
+  }
+
+  nav a:hover {
+    color: rgb(255, 255, 255);
+    background-color: #3f51b5;
+  }
+
+
+nav a:link {
+  color: rgb(255, 255, 255);
+}
+
+.linkA
+{
+  font-size: 24px;
+}

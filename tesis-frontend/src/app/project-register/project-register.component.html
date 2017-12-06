@@ -1,0 +1,197 @@
+<ng-progress [showSpinner]="false"></ng-progress>
+<br>
+<div class="container-fluid">
+  <div>
+    <mat-card>
+      <h5>Registrar proyecto</h5>
+    </mat-card>
+  </div>
+  <hr>
+
+  <mat-card>
+    <mat-card-content class="cardA">
+      <form [formGroup]="formProyecto" (ngSubmit)="submit(formProyecto.value)">
+        <label><b>Información básica</b></label>
+        <div>
+        <mat-form-field>
+          <mat-select placeholder="Carrera" formControlName="programa">
+            <mat-option *ngFor="let programa of programas" [value]="programa" >
+              {{ programa.viewValue }}
+            </mat-option>
+          </mat-select>
+    </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Sede" formControlName="sede">
+            <mat-option *ngFor="let sede of sedes" [value]="sede">
+              {{ sede.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="">
+          <mat-select placeholder="Campo de Investigación" formControlName="campo">
+            <mat-option *ngFor="let campo of campos" [value]="campo" >
+              {{ campo.nombre }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="">
+            <mat-select placeholder="Tipo de protocolo" formControlName="protocolo">
+              <mat-option *ngFor="let protocolo of protocolos" [value]="protocolo">
+                {{ protocolo.nombre }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput  placeholder="Titulo Tentativo" formControlName="titulo" required> 
+        </mat-form-field>
+
+        <hr>
+        <div formArrayName="estudiantes">
+          <div *ngFor="let estudiante of estudiantes.controls; let i=index" [formGroupName]="i" >
+              <label><b>Autor # {{i + 1}}</b></label>
+              <div>
+
+                <mat-form-field class="">
+                  <input matInput placeholder="Nombre" formControlName="nombre">
+                </mat-form-field>
+
+                <mat-form-field class="">
+                  <input matInput placeholder="Apellido" formControlName="apellido">
+                </mat-form-field>
+
+                <mat-form-field class="">
+                  <input matInput type="number" placeholder="Cedula" formControlName="cedula">
+                </mat-form-field>
+
+                <mat-form-field class="">
+                  <input matInput type="email" placeholder="Correo" formControlName="email">
+                </mat-form-field>
+
+                <mat-form-field class="">
+                  <input matInput type="tel" placeholder="Telefono" formControlName="telefono">
+                </mat-form-field>
+
+              </div>
+          </div>
+        </div>
+        
+        <div>
+          <button [disabled]="(estudiantes.controls.length>2 && formProyecto.controls['programa'].value['codigo']==2) || (estudiantes.controls.length>1 && formProyecto.controls['programa'].value['codigo']==1) || formProyecto.controls['programa'].value==0" mat-button color="primary" type="button" class="autorB" (click)="addStudent()">Agregar Autor</button>
+          <button *ngIf="estudiantes.controls.length>1" class="autorB" mat-button color="warn" type="button" (click)="deleteStudent()">Eliminar Autor</button>
+        </div>
+      </div>
+        <hr>
+
+        <div formArrayName="empresa" >
+          <div *ngFor="let estudiante of empresa.controls; let i=index" [formGroupName]="i">
+            <label><b>Empresa</b></label>
+            <div>
+              <mat-form-field class="">
+                <input matInput placeholder="Nombre" formControlName="nombre">
+              </mat-form-field>
+
+              <mat-form-field class="">
+                <input matInput placeholder="Direccion" formControlName="direccion">
+              </mat-form-field>
+
+              <mat-form-field class="">
+                  <input matInput placeholder="Correo Electrónico" formControlName="email">
+                </mat-form-field>
+
+              <mat-form-field class="">
+                  <input matInput type="tel" placeholder="Telefono" formControlName="telefono">
+                </mat-form-field>
+
+              <mat-form-field class="">
+                <input matInput type="text" placeholder="Nombre del Tutor" formControlName="nombreTutor">
+              </mat-form-field>
+
+              <mat-form-field class="">
+                <input matInput type="text" placeholder="Apellido del Tutor" formControlName="apellidoTutor">
+              </mat-form-field>
+
+              <mat-form-field class="">
+                  <input matInput type="text" placeholder="Correo del Tutor" formControlName="emailTutor">
+              </mat-form-field>
+
+              <mat-form-field class="">
+                  <input matInput type="text" placeholder="Teléfono del Tutor" formControlName="telefonoTutor">
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+        <button *ngIf="empresa.controls.length<1" mat-button color="primary" type="button" [disabled]="empresa.controls.length>0" (click)="addEmpresa()">
+            Agregar Empresa
+        </button>
+
+        <button *ngIf="empresa.controls.length>0" mat-button color="warn" type="button" [disabled]="empresa.controls.length<1" (click)="deleteEmpresa()">
+            Eliminar Empresa
+        </button>
+        
+
+        <hr>
+        <label><b>Contextualización del problema</b></label>
+        <div>
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Planteamiento del problema" matTextareaAutosize matAutosizeMinRows="1"
+      formControlName="planteamiento"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Justificación de la Investigación" matTextareaAutosize matAutosizeMinRows="1"         
+          formControlName="justificacion"></textarea>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <mat-select placeholder="Tutor Metodológico" formControlName="tutorM">
+            <mat-option *ngFor="let profesor of profesores" [value]="profesor" >
+              {{ profesor.nombre + ' ' + profesor.apellido }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-select placeholder="Tutor Académico" formControlName="tutorA">
+            <mat-option *ngFor="let profesor of profesores" [value]="profesor" >
+              {{ profesor.nombre + ' ' + profesor.apellido }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div *ngIf="tutorVal()" class="alert alert-danger" role="alert">
+          {{tutorError}}
+        </div>
+
+          <div>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Fecha de Inicio" formControlName="fecha_ini">
+              <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker2" placeholder="Fecha de Fin" formControlName="fecha_fin">
+              <mat-datepicker-toggle matSuffix [for]="picker2" ></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+
+            <div *ngIf="fechaVal()" class="alert alert-danger" role="alert">
+              {{fechaError}}
+            </div>
+          </div>
+        </div>  
+        <div>
+            <button mat-raised-button color="primary" type="submit" [disabled]="formProyecto.invalid">Registrar proyecto</button> 
+        </div>
+    </form>
+
+</mat-card-content>
+</mat-card>
+
+</div>
+<hr>

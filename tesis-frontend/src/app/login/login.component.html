@@ -1,0 +1,26 @@
+<mat-progress-bar mode="indeterminate" *ngIf="show"></mat-progress-bar>
+<hr>
+<div class="formi">
+
+  <mat-card class="Abusolute-Center">
+  
+        <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+
+        <label>Iniciar Sesión</label>
+        <mat-form-field class="but">
+          <input matInput placeholder="Nombre de usuario" formControlName="username">
+        </mat-form-field>
+      
+
+      <div>
+        <mat-form-field class="but">
+            <input matInput placeholder="Contraseña" type="password" formControlName="password">
+        </mat-form-field>
+      </div>
+      
+
+      <button mat-button color="primary" type="submit" [disabled]="loginForm.invalid">ENTRAR</button>
+      <button mat-button color="primary" type="button" (click)="gotoRegister()">REGISTRARSE</button>
+  </form>
+  </mat-card>
+</div>
